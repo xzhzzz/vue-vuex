@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
-    <el-button @click="click">点击测试{{num}}</el-button>
+    <div class="content">
+      <div class="box">1231</div>
+    </div>
+    <!--<el-button @click="click">点击测试{{num}}</el-button>-->
+    <!--<el-button @click="click2" type="primary">点击测试</el-button>-->
   </div>
 </template>
 
@@ -22,16 +26,32 @@
     },
     methods:{
       click(){
-        axios.get('/login').then(res=>{
+        axios.get('/api/login').then(res=>{
           console.log(res);
         })
+      },
+      click2(){
+        axios.get('/api/user/test').then(res=>{
+          console.log(res);
+        });
       }
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+  .content{
+    width: 10rem;
+    height: 10rem;
+    background-color: red;
+    .box{
+      width: 2rem;
+      height: 2rem;
+      background-color: yellow;
+      font-size: 0.12rem;
+    }
+  }
 h1, h2 {
   font-weight: normal;
 }
