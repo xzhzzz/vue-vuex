@@ -9,7 +9,7 @@ axios.defaults.timeout = 5000
 // http请求拦截器
 
 axios.interceptors.request.use(config => {
-  console.log(123);
+  console.log(config);
   return config
 }, error => {
 
@@ -22,12 +22,11 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(data => {// 响应成功关闭loading
 
   return data
-}, error => {
-
-  Message.error({
-    message: '加载失败'
-  })
-  return Promise.reject(error)
+  }, error => {
+    Message.error({
+      message: '加载失败'
+    })
+    return Promise.reject(error)
 })
 
 export default axios;
