@@ -1,18 +1,27 @@
 <template>
-  <div class="hello">
-    <div class="content">
-      <div class="box">{{this.number}}</div>
-    </div>
-    <el-button @click="test">click</el-button>
-    <el-button @click="click">点击测试{{num}}</el-button>
-    <el-button @click="click2" type="primary">点击测试</el-button>
-    <input type="file" ref="upload" @change="loadImageFile($event)">
-    <div>
-      <progress ref="progress" value="0"></progress>
-      {{this.percentage}}%
-    </div>
-
+  <div class="swiper">
+    <swiper :options="swiperOption" ref="mySwiper">
+      <swiper-slide style="height: 100vh">
+        <div class="hello">
+          <div class="content">
+            <div class="box">{{this.number}}</div>
+          </div>
+          <el-button @click="test">click</el-button>
+          <!--<el-button @click="click">点击测试{{num}}</el-button>-->
+          <!--<el-button @click="click2" type="primary">点击测试</el-button>-->
+          <input type="file" ref="upload" @change="loadImageFile($event)">
+          <div>
+            <progress ref="progress" value="0"></progress>
+            {{this.percentage}}%
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide style="height: 100vh">
+        1231
+      </swiper-slide>
+    </swiper>
   </div>
+
 </template>
 
 <script>
@@ -23,7 +32,10 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         number: 1,
-        percentage:0
+        percentage:0,
+        swiperOption: {
+
+        }
       }
     },
     computed:{
@@ -31,7 +43,10 @@
         num(state){
           return state.global.num;
         }
-      })
+      }),
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
     },
     methods:{
       loadImageFile(){
@@ -62,7 +77,7 @@
         };
       },
       test(){
-
+        console.log(this.swiper);
       },
       click(){
         let params = {
