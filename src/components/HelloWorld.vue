@@ -25,75 +25,73 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
-  import axios from 'axios';
-  export default {
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-        number: 1,
-        percentage:0,
-        swiperOption: {
-
+    import {mapState} from 'vuex';
+    import axios from 'axios';
+    export default {
+        data () {
+            return {
+                msg: 'Welcome to Your Vue.js App',
+                number: 1,
+                percentage: 0,
+                swiperOption: {}
+            };
+        },
+        computed: {
+            ...mapState({
+                num (state) {
+                    return state.global.num;
+                }
+            }),
+            swiper () {
+                return this.$refs.mySwiper.swiper;
+            }
+        },
+        methods: {
+            loadImageFile () {
+                let oFReader = new FileReader();
+                let rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+                if (this.$refs.upload.files.length === 0) {
+                    return;
+                }
+                this.file = this.$refs.upload.files[0];
+                let oFile = this.$refs.upload.files[0];
+                if (!rFilter.test(oFile.type)) {
+                    this.$message({
+                        message: '图片格式不正确！',
+                        type: 'warning'
+                    });
+                    return;
+                }
+                oFReader.readAsDataURL(oFile);
+                this.$refs.progress.max = oFile.size;
+                oFReader.onprogress = (oFREvent) => {
+                    this.$refs.progress.value = oFREvent.loaded;
+                    let percentage = Math.floor((oFREvent.loaded / oFREvent.total) * 100);
+                    this.percentage = percentage;
+                    console.log(oFREvent.loaded);
+                };
+                oFReader.onload = (oFREvent) => {
+                    console.log(oFREvent);
+                };
+            },
+            test () {
+                console.log(this.swiper);
+            },
+            click () {
+                let params = {
+                    id: 2
+                };
+                axios.get('/api/login', {params: params}).then(res => {
+                    console.log(res);
+                });
+            },
+            click2 () {
+                axios.get('/api/user/test').then(res => {
+                    console.log(res);
+                });
+            }
         }
-      }
-    },
-    computed:{
-      ...mapState({
-        num(state){
-          return state.global.num;
-        }
-      }),
-      swiper() {
-        return this.$refs.mySwiper.swiper
-      }
-    },
-    methods:{
-      loadImageFile(){
-        let oFReader = new FileReader();
-        let rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-        if (this.$refs.upload.files.length === 0) {
-          return;
-        }
-        this.file =  this.$refs.upload.files[0];
-        let oFile = this.$refs.upload.files[0];
-//        if (!rFilter.test(oFile.type)) {
-//          this.$message({
-//            message: '图片格式不正确！',
-//            type: 'warning'
-//          });
-//          return;
-//        }
-        oFReader.readAsDataURL(oFile);
-        this.$refs.progress.max = oFile.size;
-        oFReader.onprogress = (oFREvent)=>{
-          this.$refs.progress.value = oFREvent.loaded;
-          let percentage = Math.floor((oFREvent.loaded/oFREvent.total)*100);
-          this.percentage = percentage;
-          console.log(oFREvent.loaded);
-        }
-        oFReader.onload = (oFREvent)=>{
-          console.log(oFREvent);
-        };
-      },
-      test(){
-        console.log(this.swiper);
-      },
-      click(){
-        let params = {
-          id:2
-        };
-        axios.get('/api/login',{params:params}).then(res=>{
-          console.log(res);
-        })
-      },
-      click2(){
-        axios.get('/api/user/test').then(res=>{
-          console.log(res);
-        });
-      }
-    }
-  }
+    };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

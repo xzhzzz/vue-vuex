@@ -7,9 +7,9 @@ import global from './global';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules:{
-    global
-  }
+    modules: {
+        global
+    }
 });
 
 export default store;

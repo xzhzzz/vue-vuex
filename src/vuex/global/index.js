@@ -1,13 +1,13 @@
 'use strict';
 
 export default {
-  state: {
-    num:1
-  },
-  actions: {
+    state: {
+        num: 1
+    },
+    actions: {
 
-  },
-  mutations: {
+    },
+    mutations: {
 
-  }
+    }
 };
