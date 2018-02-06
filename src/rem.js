@@ -9,7 +9,7 @@
     let flexible = lib.flexible || (lib.flexible = {});
 
     if (metaEl) {
-        console.warn('将根据已有的meta标签来设置缩放比例');
+//        console.warn('将根据已有的meta标签来设置缩放比例');
         let match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
         if (match) {
             scale = parseFloat(match[1]);
@@ -36,7 +36,7 @@
         let isIPhone = win.navigator.appVersion.match(/iphone/gi);
         let devicePixelRatio = win.devicePixelRatio;
         if (isIPhone) {
-      // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+            // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
             if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
                 dpr = 3;
             } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
@@ -45,7 +45,7 @@
                 dpr = 1;
             }
         } else {
-      // 其他设备下，仍旧使用1倍的方案
+            // 其他设备下，仍旧使用1倍的方案
             dpr = 1;
         }
         scale = 1 / dpr;
@@ -67,10 +67,10 @@
 
     function refreshRem () {
         let width = docEl.getBoundingClientRect().width;
-        if (width / dpr > 540) {
-            width = 540 * dpr;
+        if (width / dpr > 768) {
+            width = 768 * dpr;
         }
-        let rem = width / 10;
+        let rem = width / 7.5;
         docEl.style.fontSize = rem + 'px';
         flexible.rem = win.rem = rem;
     }
