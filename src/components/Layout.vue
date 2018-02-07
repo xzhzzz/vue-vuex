@@ -1,6 +1,8 @@
 <template>
     <div class="layout">
-        <section class="item" v-for="(item,index) in arr">{{index+1}}</section>
+        <section class="item" v-for="(item,index) in arr">
+            {{index+1}}
+        </section>
     </div>
 </template>
 
