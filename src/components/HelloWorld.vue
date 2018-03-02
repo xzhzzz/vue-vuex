@@ -4,6 +4,7 @@
             <div class="box">{{this.number}}</div>
         </div>
         <el-button @click="test">click</el-button>
+        <router-link to="/list">跳转</router-link>
         <!--<el-button @click="click">点击测试{{num}}</el-button>-->
         <!--<el-button @click="click2" type="primary">点击测试</el-button>-->
         <input type="file" ref="upload" @change="loadImageFile($event)">
@@ -61,6 +62,7 @@
                 };
             },
             test () {
+
             },
             click () {
                 let params = {
